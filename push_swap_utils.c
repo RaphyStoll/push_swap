@@ -1,52 +1,59 @@
 #include "push_swap.h"
 
-void	ft_putstr(char *str)
+t_stack	*ft_lstnew(void *value)
 {
-	int count;
+	t_stack	*new;
 
-	count = 0;
-	if (!str)
+	new = malloc(sizeof(t_stack));
+	if (!new)
+		return (NULL);
+	new->value = value;
+	new->next = NULL;
+	return (new);
+}
+
+void	ft_lstadd_front(t_stack **lst, t_stack *new)
+{
+	if (lst && new)
 	{
-		write(1, "(null)", 6);
+		if (new == NULL)
+			return ;
+		new->next = *lst;
+		*lst = new;
+	}
+}
+
+void	ft_lstadd_back(t_stack **lst, t_stack *new)
+{
+	t_stack	*current;
+
+	if (new == NULL)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
 		return ;
 	}
-	while (str[count])
-		write(1, str[count], 1);
+	current = *lst;
+	while (current->next != NULL)
+		current = current->next;
+	current->next = new;
 }
 
-void	ft_exit_error(void)
+void	ft_lstclear(t_stack **lst, void (*del)(void *))
 {
-	ft_putstr("Error\n");
-	exit(EXIT_FAILURE);
+	t_stack	*current;
+	t_stack	*next;
+
+	if (lst == NULL || *lst == NULL || del == NULL)
+		return ;
+	current = *lst;
+	while (current != NULL)
+	{
+		next = current->next;
+		del(current->value);
+		free(current);
+		current = next;
+	}
+	*lst = NULL;
 }
-
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	sign;
-	int	result;
-
-	i = 0;
-	sign = 1;
-	result = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-	{
-		i++;
-	}
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-		{
-			sign = -1;
-		}
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10 + (str[i] - '0');
-		i++;
-	}
-	return (result * sign);
-}
-
-int ft_printf
