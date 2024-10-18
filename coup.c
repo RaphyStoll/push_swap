@@ -1,67 +1,97 @@
 #include "push_swap.h"
 
-// $ faudra faire les cas erreur pour toutes les fonctions 
-void swap_a(t_stack *a)
+// $ faudra faire les cas erreur pour toutes les fonctions
+void	swap(t_stack **lst)
 {
 	int	tmp;
-	tmp = a->value;
-	a->value = a->next->value;
-	a->next->value = tmp;
-	return;
+
+	tmp = (*lst)->value;
+	(*lst)->value = (*lst)->next->value;
+	(*lst)->next->value = tmp;
+	return ;
 }
 
-void swap_b(t_stack *b)
+void	swap_ab(t_stack **a, t_stack **b)
 {
-	int	tmp;
-	tmp = b->value;
-	b->value = b->next->value;
-	b->next->value = tmp;
-	return;
+	swap(a);
+	swap(b);
+	return ;
 }
 
-void swap_ab(t_stack *a, t_stack *b)
+void	push(t_stack **src, t_stack **dest)
 {
-	swap_a(a);
-	swap_b(b);
-	return;
+	t_stack	*temp;
+
+	temp = *src;
+	*src = (*src)->next;
+	temp->next = *dest;
+	*dest = temp;
+	return ;
 }
 
-void push_a(t_stack **a, t_stack **b)
+void	rotate(t_stack **head)
 {
-	t_stack *temp;
-	
-	temp = *b;
-	*b = (*b)->next;
-	temp->next = *a;
-	*a = temp;
+	t_stack	*temp;
+	t_stack	*last;
 
+	temp = (*head);
+	(*head) = (*head)->next;
+	temp->next = NULL;
+	last = *head;
+	while (last)
+		last = last->next;
+	last->next = temp;
+	return ;
 }
 
-void push_b(t_stack **a, t_stack **b)
+void	rotate_ab(t_stack **a, t_stack **b)
 {
-	t_stack *temp;
-	
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = *b;
-	*b = temp;
+	rotate(a);
+	rotateb(b);
+	return ;
 }
 
-void rotate(t_stack **a, t_stack **b)
+void	reverse_rotate(t_stack **head)
 {
+	t_stack	*prev;
+	t_stack	*last;
 
+	if (*head == NULL || (*head)->next == NULL)
+		return ;
+	prev = NULL;
+	last = *head;
+	while (last->next != NULL)
+	{
+		prev = last;
+		last = last->next;
+	}
+	prev->next = NULL;
+	last->next = *head;
+	*head = last;
 }
 
-void print_list(t_stack *head)
+void	reverse_rotate_ab(t_stack **a, t_stack **b)
 {
-    t_stack *current = head;
-    while (current != NULL)
-    {
-        printf("%d -> ", current->value);
-        current = current->next;
-    }
-    printf("NULL\n");
+	reverse_rotate(a);
+	reverse_rotate(b);
+	return ;
 }
+
+void	print_list(t_stack **head)
+{
+	t_stack	*current;
+
+	current = head;
+	while (current != NULL)
+	{
+		printf("%d -> ", current->value);
+		current = current->next;
+	}
+	printf("NULL\n");
+	return ;
+}
+
+//? test rotate_a
 
 //? test push a et b
 // int main()
@@ -107,7 +137,7 @@ void print_list(t_stack *head)
 // 	b->next = malloc(sizeof(t_stack));
 // 	b->value = 8;
 // 	b->next->value = 6;
-	
+
 // 	printf("avant swap a->value = %d\n", a->value);
 // 	printf("avant swap a->next->value = %d\n", a->next->value);
 // 	printf("avant swap b->value = %d\n", b->value);
