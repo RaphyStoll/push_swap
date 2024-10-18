@@ -1,9 +1,8 @@
 #include "push_swap.h"
 
+// $ faudra faire les cas erreur pour toutes les fonctions 
 void swap_a(t_stack *a)
 {
-	if (a->next->value == NULL)
-		return;
 	int	tmp;
 	tmp = a->value;
 	a->value = a->next->value;
@@ -13,8 +12,6 @@ void swap_a(t_stack *a)
 
 void swap_b(t_stack *b)
 {
-	if (b->next->value == NULL)
-		return;
 	int	tmp;
 	tmp = b->value;
 	b->value = b->next->value;
@@ -29,15 +26,73 @@ void swap_ab(t_stack *a, t_stack *b)
 	return;
 }
 
-void push_a(t_stack *a, t_stack *b)
+void push_a(t_stack **a, t_stack **b)
 {
-	if (b->value == NULL)
-		return ;
+	t_stack *temp;
 	
+	temp = *b;
+	*b = (*b)->next;
+	temp->next = *a;
+	*a = temp;
 
 }
 
-//?test swap_ab
+void push_b(t_stack **a, t_stack **b)
+{
+	t_stack *temp;
+	
+	temp = *a;
+	*a = (*a)->next;
+	temp->next = *b;
+	*b = temp;
+}
+
+void rotate(t_stack **a, t_stack **b)
+{
+
+}
+
+void print_list(t_stack *head)
+{
+    t_stack *current = head;
+    while (current != NULL)
+    {
+        printf("%d -> ", current->value);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
+
+//? test push a et b
+// int main()
+// {
+// 	t_stack *a;
+// 	t_stack *b;
+
+// 	a = malloc(sizeof(t_stack));
+// 	a->next = malloc(sizeof(t_stack));
+// 	a->value = 2;
+// 	a->next->value = 4;
+
+// 	b = malloc(sizeof(t_stack));
+// 	b->next = malloc(sizeof(t_stack));
+// 	b->value = 8;
+// 	b->next->value = 6;
+
+// 	puts("liste a avant push");
+// 	print_list(a);
+// 	puts("liste b avant push");
+// 	print_list(b);
+// 	push_b(&a, &b);
+// 	puts("\nliste a apres push");
+// 	print_list(a);
+// 	puts("liste b apres push");
+// 	print_list(b);
+// 	puts("\n");
+// 	return (0);
+// }
+
+//? test swap_ab
 // int main()
 // {
 // 	t_stack	*a;
@@ -65,7 +120,7 @@ void push_a(t_stack *a, t_stack *b)
 // 	printf("apres swap b->next->value = %d\n", b->next->value);
 // }
 
-//?test swap_a swap_b
+//? test swap_a swap_b
 // int main()
 // {
 // 	t_stack *a;
