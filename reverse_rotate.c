@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:39:29 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/10/26 00:52:01 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2024/10/26 17:05:03 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//fonction pour mettre le dernier element en premier
+// fonction pour mettre le dernier element en premier
 void	reverse_rotate(t_stack **head)
 {
 	t_stack	*prev;
 	t_stack	*last;
+
 	if (head == NULL || *head == NULL || (*head)->next == NULL)
 		return ;
 	prev = NULL;
