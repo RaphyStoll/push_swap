@@ -1,7 +1,7 @@
 # Définition des variables
 NAME = push_swap
 GCC = gcc
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS = -Wall -Wextra -Werror
 MKDIR = mkdir -p
 RM = rm -f
 OBJDIR = ../objects
@@ -19,7 +19,7 @@ SRC = 	push \
 		utils1 \
       	main \
 		small_algo \
-		medium_algo \
+		quick_sort_a_3_voies \
 		algo_utils
 		
 

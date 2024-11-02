@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:44:22 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/10/26 17:04:20 by raphalme         ###   ########.fr       */
+/*   Updated: 2024/10/26 01:27:47 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// ecrit une chaine de caractere sur un fd
+//ecrit une chaine de caractere sur un fd
 void	ft_putstr_fd(char *s, int fd)
 {
 	int	len;
@@ -21,18 +21,18 @@ void	ft_putstr_fd(char *s, int fd)
 	write(fd, s, len);
 }
 
-// quitte le programme avec un message d'erreur
+//quitte le programme avec un message d'erreur
 void	ft_exit_error(void)
 {
 	ft_putstr_fd("Error\n", 2);
 	exit(EXIT_FAILURE);
 }
 
-// converti une chaine de caractere en long
+//converti une chaine de caractere en long
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	sign;
+	int		i;
+	int		sign;
 	int	result;
 
 	i = 0;

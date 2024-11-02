@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_stack.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:46:46 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/10/26 17:06:05 by raphalme         ###   ########.fr       */
+/*   Updated: 2024/10/26 01:27:18 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// verification de la chaine de caracterey
+//verification de la chaine de caracterey
 int	ft_isnumber(char *str)
 {
 	int	i;
@@ -31,12 +31,12 @@ int	ft_isnumber(char *str)
 	return (1);
 }
 
-// creation de la pile depuis argv
+//creation de la pile depuis argv
 t_stack	*create_stack(int argc, char **argv)
 {
 	t_stack	*stack;
 	int		i;
-	int		value;
+	int	value;
 
 	stack = NULL;
 	if (argc < 2)

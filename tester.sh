@@ -17,33 +17,6 @@ error_exit() {
     exit 1
 }
 
-# Fonction pour afficher les critères d'évaluation de push_swap
-display_eval_criteria() {
-    echo "=== Critères d'évaluation pour push_swap ==="
-    echo ""
-    echo "- Pour une pile de 3 éléments :"
-    echo "  - Maximum de 3 instructions."
-    echo ""
-    echo "- Pour une pile de 5 éléments :"
-    echo "  - Maximum de 12 instructions."
-    echo ""
-    echo "- Pour une pile de 100 éléments :"
-    echo "  - 5 points si 700 instructions ou moins."
-    echo "  - 4 points si 900 instructions ou moins."
-    echo "  - 3 points si 1100 instructions ou moins."
-    echo "  - 2 points si 1300 instructions ou moins."
-    echo "  - 1 point si 1500 instructions ou moins."
-    echo ""
-    echo "- Pour une pile de 500 éléments :"
-    echo "  - 5 points si 5500 instructions ou moins."
-    echo "  - 4 points si 7000 instructions ou moins."
-    echo "  - 3 points si 8500 instructions ou moins."
-    echo "  - 2 points si 10000 instructions ou moins."
-    echo "  - 1 point si 11500 instructions ou moins."
-    echo ""
-    exit 0
-}
-
 # Fonction pour demander une entrée avec une valeur par défaut
 prompt_with_default() {
     local prompt_message="$1"
@@ -75,7 +48,7 @@ generate_unique_numbers() {
     while [ "${#numbers[@]}" -lt "$num_args" ]; do
         # Générer un nombre aléatoire dans la plage [min_val, max_val]
         rand=$((RANDOM % (max_val - min_val + 1) + min_val))
-
+        
         # Vérifier si le nombre existe déjà dans le tableau
         exists=0
         for number in "${numbers[@]}"; do
@@ -84,7 +57,7 @@ generate_unique_numbers() {
                 break
             fi
         done
-
+        
         # Ajouter le nombre s'il est unique
         if [ "$exists" -eq 0 ]; then
             numbers+=("$rand")
@@ -140,6 +113,7 @@ run_test() {
         echo "Nombres générés : $numbers"
     fi
 
+    # Si en mode -w, ne pas afficher les arguments générés ni la sortie complète
     if [ "$count_lines" -eq 1 ]; then
         # Exécuter push_swap et compter les lignes de sortie
         output=$("$exec_path" $numbers 2>/dev/null)
@@ -241,12 +215,11 @@ display_help() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options :"
-    echo "  -h, --help              Affiche ce message d'aide et les valeurs par défaut."
-    echo "  -m, --modif             Lance le script en mode interactif pour configurer les paramètres."
-    echo "  -c, --count             Compte le nombre de lignes de sortie de push_swap."
-    echo "  -w, --weight  <nombre>  Lance plusieurs tests et affiche uniquement le nombre de lignes de sortie par test."
-    echo "  -d, --debug             Active le mode débogage pour afficher les nombres générés."
-    echo "  -e, --eval              Affiche les critères d'évaluation de push_swap."
+    echo "  -h, --help        Affiche ce message d'aide et les valeurs par défaut."
+    echo "  -m                Lance le script en mode interactif pour configurer les paramètres."
+    echo "  -c                Compte le nombre de lignes de sortie de push_swap."
+    echo "  -w <nombre>       Lance plusieurs tests et affiche uniquement le nombre de lignes de sortie par test."
+    echo "  -d                Active le mode débogage pour afficher les nombres générés."
     echo ""
     echo "Sans options, le script exécute push_swap avec les valeurs par défaut :"
     echo "  Chemin de l'exécutable : $exec_path"
@@ -278,53 +251,43 @@ weight_flag=0
 weight_count=0
 debug_flag=0
 
-# Utiliser getopt pour parser les options longues et courtes
-PARSED_OPTIONS=$(getopt -n "$0" -o hmcw:de --long help,modif,count,weight:,debug,eval -- "$@")
-if [ $? -ne 0 ]; then
-    error_exit "Options incorrectes. Utilisez -h ou --help pour l'aide."
-fi
-
-# Réorganiser les paramètres selon getopt
-eval set -- "$PARSED_OPTIONS"
-
-# Boucle pour traiter les options
-while true; do
-    case "$1" in
-        -h|--help)
+# Analyse des options en ligne de commande
+while getopts ":hmcw:d" opt; do
+    case ${opt} in
+        h )
             display_help
             ;;
-        -m|--modif)
+        m )
             interactive_mode
             exit 0
             ;;
-        -c|--count)
+        c )
             count_flag=1
-            shift
             ;;
-        -w|--weight)
+        w )
             weight_flag=1
-            weight_count="$2"
+            weight_count="$OPTARG"
             if ! is_integer "$weight_count" || [ "$weight_count" -le 0 ]; then
                 error_exit "Le nombre de tests avec -w doit être un entier positif."
             fi
-            shift 2
             ;;
-        -d|--debug)
+        d )
             debug_flag=1
-            shift
             ;;
-        -e|--eval)
-            display_eval_criteria
+        \? )
+            error_exit "Option invalide: -$OPTARG. Utilisez -h pour l'aide."
             ;;
-        --)
-            shift
-            break
-            ;;
-        *)
-            error_exit "Option non supportée: $1. Utilisez -h ou --help pour l'aide."
+        : )
+            error_exit "L'option -$OPTARG nécessite un argument. Utilisez -h pour l'aide."
             ;;
     esac
 done
+shift $((OPTIND -1))
+
+# Vérifier si des arguments non gérés sont passés
+if [ $# -gt 0 ]; then
+    error_exit "Arguments non pris en charge. Utilisez -h pour l'aide."
+fi
 
 # Si l'option -w est activée, exécuter en mode poids
 if [ "$weight_flag" -eq 1 ]; then
