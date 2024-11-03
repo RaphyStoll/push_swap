@@ -3,36 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:43:05 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/11/03 10:58:00 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2024/11/03 12:04:49 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//fonction pour switch entre les differents algo selon la taille de la liste
-void switch_algo(t_stack **stack_a, t_stack **stack_b, int lst_size, int fd)
+// fonction pour switch entre les differents algo selon la taille de la liste
+void	switch_algo(t_stack **stack_a, t_stack **stack_b, int lst_size, int fd)
 {
-	//if (lst_size <= 5 && lst_size > 0)
-	//	small_algo(stack_a, stack_b, lst_size, fd);
+	if (lst_size <= 5 && lst_size > 0)
+		small_algo(stack_a, stack_b, lst_size, fd);
 	if (lst_size <= 500 && lst_size > 5)
-	quick_sort_a_3_voies(stack_a, stack_b, lst_size, fd);
+		quick_sort_a_3_voies(stack_a, stack_b, lst_size, fd);
 	// if (lst_size <= 500 && lst_size > 100)
 	// 	sort_all(stack_a, stack_b, lst_size, fd);
 	// if (lst_size > 500)
 	// 	sort_all(stack_a, stack_b, lst_size, fd);
 }
 
-//fonction principale
+// fonction principale
 int	main(int argc, char **argv)
 {
 	int		fd;
 	t_stack	*stack_a;
-	t_stack *stack_b;
-	int lst_size; //? si manque une ligne stocker dans argc apres split de ""
+	t_stack	*stack_b;
 
+	int lst_size; //? si manque une ligne stocker dans argc apres split de ""
 	if (argc == 1)
 		return (0);
 	fd = 1;
@@ -44,11 +44,11 @@ int	main(int argc, char **argv)
 	assign_indices(stack_a, argc - 1);
 	if (is_sorted(stack_a))
 		return (0);
-	print_list(&stack_a, fd);	//$ print list indice
-	print_list(&stack_b, fd);	//$ print list indice
+	// print_list(&stack_a, fd); //$ print list indice
+	// print_list(&stack_b, fd); //$ print list indice
 	switch_algo(&stack_a, &stack_b, lst_size, fd);
-	print_list(&stack_a, fd);	//$ print list end
-	print_list(&stack_b, fd);	//$ print list end
+	// print_list(&stack_a, fd); //$ print list end
+	// print_list(&stack_b, fd); //$ print list end
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);
