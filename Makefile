@@ -1,7 +1,7 @@
 # Définition des variables
 NAME = push_swap
 GCC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 MKDIR = mkdir -p
 RM = rm -f
 OBJDIR = ../objects

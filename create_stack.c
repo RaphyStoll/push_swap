@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:46:46 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/10/26 01:27:18 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2024/11/03 08:53:01 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	stack_size(t_stack *stack)
 	int	count;
 
 	count = 0;
-	while (stack)
+	while (stack != NULL)
 	{
 		count++;
 		stack = stack->next;

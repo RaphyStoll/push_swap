@@ -42,12 +42,26 @@ int is_sorted(t_stack *stack)
 {
     if (stack == NULL || stack->next == NULL)
         return 1;
-    
-    while (stack->next != NULL) {
-        if (stack->value > stack->next->value) {
+    while (stack->next != NULL)
+	{
+        if (stack->value > stack->next->value)
+		{
             return 0;
         }
         stack = stack->next;
     }
     return 1;
+}
+
+// Fonction pour libérer la pile
+void	free_stack(t_stack **a)
+{
+    t_stack *tmp;
+
+    while (*a != NULL)
+    {
+        tmp = *a;
+        *a = (*a)->next;
+        free(tmp);
+    }
 }

@@ -1,55 +1,56 @@
 #include "push_swap.h"
 
-int	find_pivot(t_stack *a, int lst_size)
+int	find_pivot(t_stack *stack)
 {
-	int		pivot;
-	int		i;
-	t_stack	*tmp;
+	int pivot;
 
-	i = 0;
-	tmp = a;
-	while (i < lst_size / 2)
-	{
-		tmp = tmp->next;
-		i++;
-	}
-	pivot = tmp->id;
+	pivot = stack_size(stack) / 2;
 	return (pivot);
 }
 
 void partition_stack(t_stack **a, t_stack **b, int pivot, int fd)
 {
-	t_stack *current;
+	int i;
+	int initial_size;
 
-	current = *a;
-	while (current != NULL)
+	i = 0;
+	initial_size = stack_size(*a);
+	while (i < initial_size)
 	{
-		if (current->id < pivot)
+		if ((*a)->id < pivot)
 		{
-			puts("plus petit");
+			//printf("plus petit id = %d\n", (*a)->id);
 			pb(a, b, fd);
 		}
-		else if (current->id == pivot)
+		else
 		{
-			puts("egal");
+			//printf("plus grand id = %d\n", (*a)->id);
 			ra(a, fd);
 		}
-		else if (current->id > pivot)
-		{
-			puts("plus grand");
-			ra(a, fd);
-		}
-		current = current->next;
+		i++;
 	}
 }
 
 void	quick_sort_a_3_voies(t_stack **a, t_stack **b, int lst_size, int fd)
 {
+	(void)lst_size;
 	int pivot;
-
-	pivot = find_pivot(lst_size);
-	printf("pivot: %d\n", pivot);
+	int size_b;
+	int size_a;
+(void)size_a;
+	pivot = find_pivot(*a);
+	printf("pivot = %d\n", pivot);
 	if (pivot == -1)
-		puts("Error: pivot not found");
+		ft_exit_error();
 	partition_stack(a, b, pivot, fd);
+	size_b = stack_size(*b);
+	printf("size_b = %d\n", size_b);
+	//if (size_b > 1)
+      // quick_sort_a_3_voies(b, a, size_b, fd);
+	// while (*b != NULL)
+    //     pa(a, b, fd);
+	//size_a = stack_size(*a);
+	//printf("size_a = %d\n", size_a);
+	// if (size_a > 1)
+	// 	quick_sort_a_3_voies(a, b, lst_size, fd);
 }

@@ -27,7 +27,7 @@ void	sort_5(t_stack **a, t_stack **b, int fd, int first, int second, int third, 
 //! Algo 5 - 100
 void	quick_sort_a_3_voies(t_stack **a, t_stack **b, int lst_size, int fd);
 void partition_stack(t_stack **a, t_stack **b, int pivot, int fd);
-int find_pivot(int lst_size);
+int     find_pivot(t_stack *stack);
 //!algo utils
 void find_smallest(t_stack **a, t_stack **b, int fd, int f, int s, int t, int fo);
 
@@ -71,6 +71,7 @@ char	*ft_strdup(char *s1);
 int	set_last(t_stack **lst);
 int	set_prev(t_stack **lst);
 int is_sorted(t_stack *stack);
+void	free_stack(t_stack **a);
 
 // //!juste split
 // void	free_split(char **split, int words);
