@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:43:05 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/11/03 12:04:49 by raphalme         ###   ########.fr       */
+/*   Updated: 2024/11/04 21:28:27 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ int	main(int argc, char **argv)
 	if (stack_a == NULL || stack_b != NULL)
 		ft_exit_error();
 	lst_size = stack_size(stack_a);
+	printf("lst_size = %d\n", lst_size);
 	assign_indices(stack_a, argc - 1);
 	if (is_sorted(stack_a))
 		return (0);
-	// print_list(&stack_a, fd); //$ print list indice
-	// print_list(&stack_b, fd); //$ print list indice
+	//print_list(&stack_a, fd); //$ print list indice
+	//print_list(&stack_b, fd); //$ print list indice
 	switch_algo(&stack_a, &stack_b, lst_size, fd);
-	// print_list(&stack_a, fd); //$ print list end
-	// print_list(&stack_b, fd); //$ print list end
+	print_list(&stack_a, fd); //$ print list end
+	print_list(&stack_b, fd); //$ print list end
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);

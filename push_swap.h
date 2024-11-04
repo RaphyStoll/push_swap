@@ -30,7 +30,7 @@ void				quick_sort_a_3_voies(t_stack **a, t_stack **b, int lst_size,
 						int fd);
 void				partition_stack(t_stack **a, t_stack **b, int pivot,
 						int fd);
-int					find_pivot(t_stack *stack);
+int					find_pivot(int lst_size,t_stack *stack);
 //! algo utils
 void				find_smallest(t_stack **a, t_stack **b, int fd);
 void				find_biggest(t_stack **a, t_stack **b, int fd);

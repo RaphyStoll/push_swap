@@ -7,7 +7,7 @@
 
 # Définir les variables par défaut globalement
 exec_path="./push_swap"
-num_args=5
+num_args=10
 min_val=-1000
 max_val=1000
 
