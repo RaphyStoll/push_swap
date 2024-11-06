@@ -28,7 +28,7 @@ void				sort_5(t_stack **a, t_stack **b, int fd);
 //! Algo 5 - 100
 void				quick_sort_a_3_voies(t_stack **a, t_stack **b, int lst_size,
 						int fd);
-void				partition_stack(t_stack **a, t_stack **b, int pivot,
+void				partition_stack_a(t_stack **a, t_stack **b, int pivot,
 						int fd);
 int					find_pivot(int lst_size,t_stack *stack);
 //! algo utils
@@ -58,6 +58,8 @@ t_stack				*create_stack(int argc, char **argv);
 void				bubble_sort(int *tab, int size);
 void				assign_indices(t_stack *a, int size);
 int					stack_size(t_stack *stack);
+void	quick_sort(int *arr, int low, int high);
+int	partition_func(int *arr, int low, int high);
 
 //! utils
 void				ft_putstr_fd(char *s, int fd);

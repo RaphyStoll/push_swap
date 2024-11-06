@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:43:05 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/11/04 21:28:27 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2024/11/05 21:28:26 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	main(int argc, char **argv)
 	assign_indices(stack_a, argc - 1);
 	if (is_sorted(stack_a))
 		return (0);
-	//print_list(&stack_a, fd); //$ print list indice
-	//print_list(&stack_b, fd); //$ print list indice
+	print_list(&stack_a, fd); //$ print list indice
+	print_list(&stack_b, fd); //$ print list indice
 	switch_algo(&stack_a, &stack_b, lst_size, fd);
 	print_list(&stack_a, fd); //$ print list end
 	print_list(&stack_b, fd); //$ print list end
