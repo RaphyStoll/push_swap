@@ -6,7 +6,7 @@
 /*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:03:40 by raphalme          #+#    #+#             */
-/*   Updated: 2024/10/27 15:26:54 by raphalme         ###   ########.fr       */
+/*   Updated: 2024/11/09 15:10:51 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	find_pivot(t_stack *a, int lst_size)
 	return (pivot);
 }
 
-void	partition_stack_by_pivot(t_stack **a, t_stack **b, int pivot, int fd)
+void	partition_stack_by_pivot(t_stack **a, t_stack **b, int pivot)
 {
 	t_stack	*tmp;
 
@@ -37,19 +37,19 @@ void	partition_stack_by_pivot(t_stack **a, t_stack **b, int pivot, int fd)
 	while (tmp != NULL)
 	{
 		if (tmp->id < pivot)
-			pb(a, b, fd);
+			pb(a, b);
 		else if (tmp->id == pivot)
-			ra(a, fd);
+			ra(a);
 		else if (tmp->id > pivot)
-			ra(a, fd);
+			ra(a);
 		tmp = tmp->next;
 	}
 }
 
-void	medium_algo(t_stack **a, t_stack **b, int lst_size, int fd)
+void	medium_algo(t_stack **a, t_stack **b, int lst_size)
 {
 	int	pivot;
 
 	pivot = find_pivot(*a, lst_size);
-	partition_stack_by_pivot(a, b, pivot, fd);
+	partition_stack_by_pivot(a, b, pivot);
 }

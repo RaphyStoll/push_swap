@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:39:29 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/11/03 08:52:18 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2024/11/09 15:11:27 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,24 @@ void	reverse_rotate(t_stack **head)
     *head = last;
 }
 
-void	rra(t_stack **a, int fd)
+void	rra(t_stack **a)
 {
 	reverse_rotate(a);
-	ft_putstr_fd("rra\n", fd);
+	ft_putstr_fd("rra\n", 1);
 	return ;
 }
 
-void	rrb(t_stack **b, int fd)
+void	rrb(t_stack **b)
 {
 	reverse_rotate(b);
-	ft_putstr_fd("rrb\n", fd);
+	ft_putstr_fd("rrb\n", 1);
 	return ;
 }
 
-void	rrr(t_stack **a, t_stack **b, int fd)
+void	rrr(t_stack **a, t_stack **b)
 {
 	reverse_rotate(a);
 	reverse_rotate(b);
-	ft_putstr_fd("rrr\n", fd);
+	ft_putstr_fd("rrr\n", 1);
 	return ;
 }

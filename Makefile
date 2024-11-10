@@ -19,8 +19,12 @@ SRC = 	push \
 		utils1 \
       	main \
 		small_algo \
-		quick_sort_a_3_voies \
-		algo_utils
+		algo_utils \
+		ft_split \
+		split_utils \
+		radix_sort
+#		quick_sort
+
 		
 
 

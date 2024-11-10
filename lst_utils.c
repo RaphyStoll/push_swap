@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:40:45 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/10/26 01:28:24 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2024/11/09 15:07:04 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,25 @@ t_stack	*ft_create_node(int value)
 }
 
 //print un noeud de la liste
-void	print_node(t_stack *current, int fd)
+void	print_node(t_stack *current)
 {
 	ft_putnbr(current->value);
-	ft_putstr_fd("(", fd);
+	ft_putstr_fd("(", 1);
 	ft_putnbr(current->id);
-	ft_putstr_fd(") -> ", fd);
+	ft_putstr_fd(") -> ", 1);
 }
 
 //print la liste
-void	print_list(t_stack **head, int fd)
+void	print_list(t_stack **head)
 {
 	t_stack	*current;
 
 	current = *head;
 	while (current != NULL)
 	{
-		print_node(current, fd);
+		print_node(current);
 		current = current->next;
 	}
-	ft_putstr_fd("NULL\n", fd);
+	ft_putstr_fd("NULL\n", 1);
 	return ;
 }

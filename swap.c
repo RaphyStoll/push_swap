@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:38:06 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/10/26 01:32:28 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2024/11/09 15:13:14 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,27 @@ void	swap(t_stack **lst)
 	return ;
 }
 
-void	sa(t_stack **a, int fd)
+void	sa(t_stack **a)
 {
 	if (a == NULL || *a == NULL || (*a)->next == NULL)
 		return ;
 	swap(a);
-	ft_putstr_fd("sa\n", fd);
+	ft_putstr_fd("sa\n", 1);
 }
 
-void	sb(t_stack **b, int fd)
+void	sb(t_stack **b)
 {
 	if (b == NULL || *b == NULL || (*b)->next == NULL)
 		return ;
 	swap(b);
-	ft_putstr_fd("sb\n", fd);
+	ft_putstr_fd("sb\n", 1);
 }
 
 // swap a et b
-void	ss(t_stack **a, t_stack **b, int fd)
+void	ss(t_stack **a, t_stack **b)
 {
 	swap(a);
 	swap(b);
-	ft_putstr_fd("ss\n", fd);
+	ft_putstr_fd("ss\n", 1);
 	return ;
 }

@@ -7,8 +7,8 @@
 
 # Définir les variables par défaut globalement
 exec_path="./push_swap"
-num_args=10
-min_val=-1000
+num_args=30
+min_val=0
 max_val=1000
 
 # Fonction pour afficher un message d'erreur et quitter

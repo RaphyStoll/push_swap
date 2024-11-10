@@ -6,24 +6,24 @@
 /*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:04:31 by raphalme          #+#    #+#             */
-/*   Updated: 2024/11/03 12:05:02 by raphalme         ###   ########.fr       */
+/*   Updated: 2024/11/09 15:12:55 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // trie une liste de 2 elements
-void	sort_2(t_stack **a, int fd)
+void	sort_2(t_stack **a)
 {
 	puts("sort_2");
 	if (stack_size(*a) != 2)
 		return ;
 	if ((*a)->id > (*a)->next->id)
-		sa(a, fd);
+		sa(a);
 }
 
 // trie une liste de 3 elements
-void	sort_3(t_stack **a, int fd)
+void	sort_3(t_stack **a)
 {
 	int	first;
 	int	second;
@@ -35,57 +35,57 @@ void	sort_3(t_stack **a, int fd)
 	if (stack_size(*a) != 3)
 		return ;
 	if (first > second && second < third && first < third)
-		sa(a, fd);
+		sa(a);
 	else if (first > second && second > third)
 	{
-		sa(a, fd);
-		rra(a, fd);
+		sa(a);
+		rra(a);
 	}
 	else if (first > second && second < third && first > third)
-		ra(a, fd);
+		ra(a);
 	else if (first < second && second > third && first < third)
 	{
-		sa(a, fd);
-		ra(a, fd);
+		sa(a);
+		ra(a);
 	}
 	else if (first < second && second > third && first > third)
-		rra(a, fd);
+		rra(a);
 }
 
 // trie une liste de 4 elements
-void	sort_4(t_stack **a, t_stack **b, int fd)
+void	sort_4(t_stack **a, t_stack **b)
 {
 	if (stack_size(*a) != 4)
 		return ;
-	find_smallest(a, b, fd);
-	sort_3(a, fd);
-	pa(a, b, fd);
+	find_smallest(a, b);
+	sort_3(a);
+	pa(a, b);
 }
 
 // trie une liste de 5 elements
-void	sort_5(t_stack **a, t_stack **b, int fd)
+void	sort_5(t_stack **a, t_stack **b)
 {
 	if (stack_size(*a) != 5)
 		return ;
-	find_biggest(a, b, fd);
-	sort_4(a, b, fd);
-	pa(a, b, fd);
-	ra(a, fd);
+	find_biggest(a, b);
+	sort_4(a, b);
+	pa(a, b);
+	ra(a);
 }
 
 // switch entre les differents algo selon la taille de la liste
-void	small_algo(t_stack **a, t_stack **b, int lst_size, int fd)
+void	small_algo(t_stack **a, t_stack **b, int lst_size)
 {
 	if (lst_size == 2)
-		sort_2(a, fd);
+		sort_2(a);
 	else if (lst_size == 3)
 	{
 		// puts("sort3");
-		sort_3(a, fd);
+		sort_3(a);
 	}
 	else if (lst_size == 4)
-		sort_4(a, b, fd);
+		sort_4(a, b);
 	else if (lst_size == 5)
-		sort_5(a, b, fd);
+		sort_5(a, b);
 	return ;
 }

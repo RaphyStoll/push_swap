@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
+/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:48:53 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/11/03 08:52:02 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2024/11/09 15:11:57 by raphalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,24 @@ void	rotate(t_stack **head)
     temp->prev = last;
 }
 
-void	ra(t_stack **a, int fd)
+void	ra(t_stack **a)
 {
 	rotate(a);
-	ft_putstr_fd("ra\n", fd);
+	ft_putstr_fd("ra\n", 1);
 	return ;
 }
 
-void	rb(t_stack **b, int fd)
+void	rb(t_stack **b)
 {
 	rotate(b);
-	ft_putstr_fd("rb\n", fd);
+	ft_putstr_fd("rb\n", 1);
 	return ;
 }
 
-void	rr(t_stack **a, t_stack **b, int fd)
+void	rr(t_stack **a, t_stack **b)
 {
 	rotate(a);
 	rotate(b);
-	ft_putstr_fd("rr\n", fd);
+	ft_putstr_fd("rr\n", 1);
 	return ;
 }
