@@ -7,8 +7,8 @@
 
 # Définir les variables par défaut globalement
 exec_path="./push_swap"
-num_args=30
-min_val=0
+num_args=500
+min_val=-1000
 max_val=1000
 
 # Fonction pour afficher un message d'erreur et quitter
@@ -241,12 +241,13 @@ display_help() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options :"
-    echo "  -h, --help              Affiche ce message d'aide et les valeurs par défaut."
-    echo "  -m, --modif             Lance le script en mode interactif pour configurer les paramètres."
-    echo "  -c, --count             Compte le nombre de lignes de sortie de push_swap."
-    echo "  -w, --weight  <nombre>  Lance plusieurs tests et affiche uniquement le nombre de lignes de sortie par test."
-    echo "  -d, --debug             Active le mode débogage pour afficher les nombres générés."
-    echo "  -e, --eval              Affiche les critères d'évaluation de push_swap."
+    echo "  -h              Affiche ce message d'aide et les valeurs par défaut."
+    echo "  -m              Lance le script en mode interactif pour configurer les paramètres."
+    echo "  -c              Compte le nombre de lignes de sortie de push_swap."
+    echo "  -w <nombre>     Lance plusieurs tests et affiche uniquement le nombre de lignes de sortie par test."
+    echo "  -d              Active le mode débogage pour afficher les nombres générés."
+    echo "  -e              Affiche les critères d'évaluation de push_swap."
+    echo "  -n              Affiche uniquement les nombres aléatoires générés."
     echo ""
     echo "Sans options, le script exécute push_swap avec les valeurs par défaut :"
     echo "  Chemin de l'exécutable : $exec_path"
@@ -272,63 +273,80 @@ default_mode() {
     run_test "$count_flag"
 }
 
+# Fonction pour afficher uniquement les nombres générés
+display_numbers() {
+    # Vérifier que la plage est suffisante pour générer des nombres uniques
+    local range=$((max_val - min_val + 1))
+    if [ "$num_args" -gt "$range" ]; then
+        error_exit "Impossible de générer $num_args nombres uniques dans la plage [$min_val, $max_val]."
+    fi
+
+    # Générer des nombres aléatoires uniques
+    numbers=$(generate_unique_numbers "$num_args" "$min_val" "$max_val")
+
+    # Valider les nombres générés
+    validate_numbers "$numbers" "$min_val" "$max_val"
+
+    # Afficher les nombres générés
+    echo "Nombres générés : $numbers"
+}
+
 # Initialiser les flags
 count_flag=0
 weight_flag=0
 weight_count=0
 debug_flag=0
+number_only_flag=0
 
-# Utiliser getopt pour parser les options longues et courtes
-PARSED_OPTIONS=$(getopt -n "$0" -o hmcw:de --long help,modif,count,weight:,debug,eval -- "$@")
-if [ $? -ne 0 ]; then
-    error_exit "Options incorrectes. Utilisez -h ou --help pour l'aide."
-fi
-
-# Réorganiser les paramètres selon getopt
-eval set -- "$PARSED_OPTIONS"
-
-# Boucle pour traiter les options
-while true; do
-    case "$1" in
-        -h|--help)
+# Utiliser getopts pour parser les options
+while getopts ":hmcw:den" opt; do
+    case "$opt" in
+        h)
             display_help
             ;;
-        -m|--modif)
+        m)
             interactive_mode
             exit 0
             ;;
-        -c|--count)
+        c)
             count_flag=1
-            shift
             ;;
-        -w|--weight)
+        w)
             weight_flag=1
-            weight_count="$2"
+            weight_count="$OPTARG"
             if ! is_integer "$weight_count" || [ "$weight_count" -le 0 ]; then
                 error_exit "Le nombre de tests avec -w doit être un entier positif."
             fi
-            shift 2
             ;;
-        -d|--debug)
+        d)
             debug_flag=1
-            shift
             ;;
-        -e|--eval)
+        e)
             display_eval_criteria
             ;;
-        --)
-            shift
-            break
+        n)
+            number_only_flag=1
             ;;
-        *)
-            error_exit "Option non supportée: $1. Utilisez -h ou --help pour l'aide."
+        \?)
+            error_exit "Option non supportée : -$OPTARG. Utilisez -h pour l'aide."
+            ;;
+        :)
+            error_exit "L'option -$OPTARG nécessite un argument."
             ;;
     esac
 done
 
+shift $((OPTIND -1))
+
 # Si l'option -w est activée, exécuter en mode poids
 if [ "$weight_flag" -eq 1 ]; then
     weighted_mode "$weight_count"
+    exit 0
+fi
+
+# Si l'option -n est activée, afficher uniquement les nombres générés et quitter
+if [ "$number_only_flag" -eq 1 ]; then
+    display_numbers
     exit 0
 fi
 

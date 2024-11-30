@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:39:29 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/11/09 15:11:27 by raphalme         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:04:54 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 //fonction pour mettre le dernier element en premier
 void	reverse_rotate(t_stack **head)
 {
-	  t_stack	*prev;
-    t_stack	*last;
+	t_stack	*prev;
+	t_stack	*last;
 
-    if (head == NULL || *head == NULL || (*head)->next == NULL)
-        return ;
-    prev = NULL;
-    last = *head;
-    while (last->next != NULL)
-    {
-        prev = last;
-        last = last->next;
-    }
-    if (prev != NULL)
-        prev->next = NULL;
-    last->prev = NULL;
-    last->next = *head;
-    (*head)->prev = last;
-    *head = last;
+	if (head == NULL || *head == NULL || (*head)->next == NULL)
+		return ;
+	prev = NULL;
+	last = *head;
+	while (last->next != NULL)
+	{
+		prev = last;
+		last = last->next;
+	}
+	if (prev != NULL)
+		prev->next = NULL;
+	last->prev = NULL;
+	last->next = *head;
+	(*head)->prev = last;
+	*head = last;
 }
 
 void	rra(t_stack **a)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   small_algo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:04:31 by raphalme          #+#    #+#             */
-/*   Updated: 2024/11/09 15:12:55 by raphalme         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:06:03 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 // trie une liste de 2 elements
 void	sort_2(t_stack **a)
 {
-	puts("sort_2");
 	if (stack_size(*a) != 2)
 		return ;
 	if ((*a)->id > (*a)->next->id)
@@ -79,10 +78,7 @@ void	small_algo(t_stack **a, t_stack **b, int lst_size)
 	if (lst_size == 2)
 		sort_2(a);
 	else if (lst_size == 3)
-	{
-		// puts("sort3");
 		sort_3(a);
-	}
 	else if (lst_size == 4)
 		sort_4(a, b);
 	else if (lst_size == 5)

@@ -6,7 +6,7 @@
 /*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:44:22 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/11/04 19:38:59 by raphaelferr      ###   ########.fr       */
+/*   Updated: 2024/11/14 15:06:58 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	ft_exit_error(void)
 //converti une chaine de caractere en long
 int	ft_atoi(const char *str)
 {
-	int		i;
-	int		sign;
+	int	i;
+	int	sign;
 	int	result;
 
 	i = 0;

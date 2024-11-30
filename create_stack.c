@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_stack.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raphalme <raphalme@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raphaelferreira <raphaelferreira@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:46:46 by raphaelferr       #+#    #+#             */
-/*   Updated: 2024/11/10 16:30:40 by raphalme         ###   ########.fr       */
+/*   Updated: 2024/11/14 14:51:28 by raphaelferr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ int	is_dooble(int argc, char **argv)
 	int	j;
 
 	i = 1;
-	puts("rentre dans isdoublon");
 	while (i < argc)
 	{
 		j = i + 1;
 		while (j < argc)
 		{
 			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
-				return (1);
+			{
+				ft_exit_error();
+			}
 			j++;
 		}
 		i++;
@@ -35,24 +36,55 @@ int	is_dooble(int argc, char **argv)
 }
 
 //verification de la chaine de caracterey
+//* @s = sign si 1 = '+' si -1 = '-'
 int	ft_isnumber(char *str)
 {
-	int	i;
+	int		i;
+	long	result;
+	int		s;	
 
 	i = 0;
-	if (str[i] > 2147483647)
-		ft_exit_error();
+	result = 0;
+	s = 1;
 	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			s = -1;
 		i++;
+	}
 	if (!str[i])
 		return (0);
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
 			return (0);
+		result = result * 10 + (str[i] - '0');
+		if ((s == 1 && result > INT_MAX) || (s == -1 && - result < INT_MIN))
+			ft_exit_error();
 		i++;
 	}
 	return (1);
+}
+
+//cree le nouveau argv apres le split de la chaine
+//en gardant argv[1] = ./programme_name
+char	**new_av(char **argv)
+{
+	char	**tab;
+	int		count;
+	int		index;
+
+	index = 1;
+	count = 0;
+	tab = ft_split(argv[1], ' ');
+	while (tab[count] != NULL)
+	{
+		argv[index] = tab[count];
+		count++;
+		index++;
+	}
+	argv[index] = NULL;
+	return (argv);
 }
 
 //creation de la pile depuis argv
@@ -60,22 +92,15 @@ t_stack	*create_stack(int argc, char **argv)
 {
 	t_stack	*stack;
 	int		i;
-	int	value;
-	int count = 0; //$
+	int		value;
 
 	stack = NULL;
 	if (argc == 2)
-		argv = ft_split(argv[1], ' ');
-	while(argv[count])
-		count++;
-	argc = count;
+		argv = new_av(argv);
+	argc = set_argc(argc, argv);
 	if (argc < 2)
 		return (stack);
-	if (is_dooble(argc, argv))
-	{
-		puts("isdoublon");
-		ft_exit_error();
-	}
+	is_dooble(argc, argv);
 	i = argc - 1;
 	while (i > 0)
 	{
@@ -88,16 +113,13 @@ t_stack	*create_stack(int argc, char **argv)
 	return (stack);
 }
 
-// Fonction pour calculer la taille de la pile
-int	stack_size(t_stack *stack)
+int	set_argc(int argc, char **argv)
 {
 	int	count;
 
 	count = 0;
-	while (stack != NULL)
-	{
+	while (argv[count])
 		count++;
-		stack = stack->next;
-	}
-	return (count);
+	argc = count;
+	return (argc);
 }
