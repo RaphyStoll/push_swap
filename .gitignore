@@ -1,3 +1,9 @@
 .vscode
 .DS_Store
 push_swap
+*.sh
+*.ini
+*.out
+checker_mac
+*.txt
+quick_sort.c
